@@ -7,14 +7,17 @@ require 'socket'
 options = Hash.new
 
 OptionParser.new do |opts|
-    ["action ACT", "owner USER", "cmdline CMD", "stdout FILE", "stderr FILE"].each do |opt_name|
+    ["action ACT", "owner USER", "cmdline CMD", "stdout FILE", "stderr FILE", "addr ADDRESS"].each do |opt_name|
         opts.on("--#{opt_name}") do |opt|
             options[opt_name.split.first] = opt
         end
     end
 end.parse!
 
-if options["action"].nil? or options["action"].empty?
+if options["addr"].nil? or options["addr"].empty?
+    puts "No address specified, defaulting to localhost"
+    options["addr"] = "localhost"
+elsif options["action"].nil? or options["action"].empty?
     puts "You need to specify an action!"
     exit
 elsif options["action"] == "sched" and (options["owner"].nil? or options["cmdline"].nil? or options["owner"].empty? or options["cmdline"].empty?)
@@ -22,7 +25,7 @@ elsif options["action"] == "sched" and (options["owner"].nil? or options["cmdlin
     exit
 end
 
-server = TCPSocket.open("localhost", 1988)
+server = TCPSocket.open(options["addr"], 1988)
 
 # MOTD (2 lines)
 puts server.gets
