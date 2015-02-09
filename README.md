@@ -8,8 +8,8 @@ It's a very simple client-server architecture to schedule jobs on the cluster. A
 
 When there is no way for us to make him understand what is the proper and mutually respectful way to use the cluster, we have to... **fight back**!
 
-Who is Maxence
---------------
+Who is Maxence?
+---------------
 
 Maxence is just a fictional French name, given to hypothetical (ab)user who is using all the resources on the cluster. It is certainly **not** a reference to any real-world person.
 
@@ -37,3 +37,8 @@ Of course you must be inside the VPN in order to access the cluster node by its 
       2         User3      queued       command3
 
 Jobs are put on a FIFO queue, so each job is served after the previous one is finished.
+
+License
+-------
+
+This software is distributed under the GNU General Public License v3, as detailed in `LICENSE.txt`.
